@@ -1,0 +1,26 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/java-postgres
+{
+  "name": "Java & PostgreSQL",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vmware.vscode-boot-dev-pack"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "java.saveActions.organizeImports": true,
+        "java.format.enabled": true,
+        "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml"
+      }
+    }
+  },
+  "containerEnv": {
+    "PGPASSWORD": "postgres"
+  },
+  "postStartCommand": "psql -h postgresdb -U postgres -f .devcontainer/init.sql"
+}
